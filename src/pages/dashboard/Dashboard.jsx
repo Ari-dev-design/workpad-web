@@ -65,7 +65,8 @@ export default function Dashboard() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      {/* Grid Responsive: 1 columna en móvil, 3 en escritorio */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
           <div>
             <p className="text-gray-500 text-sm font-medium">
@@ -134,7 +135,8 @@ export default function Dashboard() {
             {recentProjects.map((project) => (
               <div
                 key={project.id}
-                className="p-4 border-b border-gray-50 flex items-center justify-between hover:bg-gray-50 transition-colors"
+                // CAMBIO RESPONSIVE AQUÍ: flex-col en móvil, flex-row en escritorio
+                className="p-4 border-b border-gray-50 flex flex-col sm:flex-row sm:items-center justify-between hover:bg-gray-50 transition-colors gap-4 sm:gap-0"
               >
                 <div>
                   <h4 className="font-medium text-gray-800">{project.title}</h4>
@@ -142,7 +144,9 @@ export default function Dashboard() {
                     {project.description || "Sin descripción"}
                   </p>
                 </div>
-                <div className="flex items-center gap-4">
+
+                {/* Contenedor de estado y precio: Ajustado para móvil */}
+                <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto mt-2 sm:mt-0">
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-semibold 
                     ${

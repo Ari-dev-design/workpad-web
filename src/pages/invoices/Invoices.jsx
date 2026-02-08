@@ -44,11 +44,12 @@ export default function Invoices() {
 
   return (
     <Layout>
-      <div className="flex justify-between items-center mb-6">
+      {/* RESPONSIVE: Cabecera flexible */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 sm:gap-0">
         <h1 className="text-2xl font-bold text-gray-800">Facturas</h1>
         <Link
           to="/invoices/new"
-          className="bg-primary hover:bg-violet-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
+          className="bg-primary hover:bg-violet-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors w-full sm:w-auto justify-center"
         >
           <Plus size={20} />
           <span>Nueva Factura</span>
@@ -67,11 +68,17 @@ export default function Invoices() {
         {invoices.map((invoice) => (
           <div
             key={invoice.id}
-            className="p-4 border-b border-gray-50 flex items-center justify-between hover:bg-gray-50 transition-colors"
+            // RESPONSIVE: flex-col en móvil para apilar elementos, flex-row en PC
+            className="p-4 border-b border-gray-50 flex flex-col sm:flex-row sm:items-center justify-between hover:bg-gray-50 transition-colors gap-4 sm:gap-0"
           >
-            <div className="flex items-center gap-4">
+            {/* Bloque Izquierdo: Icono e Info */}
+            <div className="flex items-center gap-4 w-full sm:w-auto">
               <div
-                className={`p-3 rounded-lg ${invoice.status === "Paid" || invoice.status === "Pagada" ? "bg-green-100 text-green-600" : "bg-yellow-100 text-yellow-600"}`}
+                className={`p-3 rounded-lg ${
+                  invoice.status === "Paid" || invoice.status === "Pagada"
+                    ? "bg-green-100 text-green-600"
+                    : "bg-yellow-100 text-yellow-600"
+                }`}
               >
                 <FileText size={24} />
               </div>
@@ -85,43 +92,47 @@ export default function Invoices() {
               </div>
             </div>
 
-            <div className="text-right">
-              <p className="font-bold text-lg">{invoice.amount} €</p>
-              <p className="text-xs text-gray-400">{invoice.date}</p>
-            </div>
+            {/* Bloque Derecho: Precio, Fecha y Acciones */}
+            {/* En móvil se pone debajo y ocupa todo el ancho con justify-between */}
+            <div className="flex items-center justify-between w-full sm:w-auto sm:gap-6">
+              <div className="text-left sm:text-right">
+                <p className="font-bold text-lg">{invoice.amount} €</p>
+                <p className="text-xs text-gray-400">{invoice.date}</p>
+              </div>
 
-            <div className="flex items-center gap-3">
-              <span
-                className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                  invoice.status === "Paid" || invoice.status === "Pagada"
-                    ? "bg-green-100 text-green-700"
-                    : "bg-yellow-100 text-yellow-700"
-                }`}
-              >
-                {invoice.status === "Paid" || invoice.status === "Pagada"
-                  ? "Pagada"
-                  : "Pendiente"}
-              </span>
+              <div className="flex items-center gap-3">
+                <span
+                  className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                    invoice.status === "Paid" || invoice.status === "Pagada"
+                      ? "bg-green-100 text-green-700"
+                      : "bg-yellow-100 text-yellow-700"
+                  }`}
+                >
+                  {invoice.status === "Paid" || invoice.status === "Pagada"
+                    ? "Pagada"
+                    : "Pendiente"}
+                </span>
 
-              <PDFDownloadLink
-                document={
-                  <InvoiceDocument
-                    invoice={invoice}
-                    projectName={getProjectName(invoice.project_id)}
-                  />
-                }
-                fileName={`factura_${invoice.number}.pdf`}
-                className="text-gray-400 hover:text-blue-500 p-2 transition-colors"
-              >
-                {({ loading }) => (loading ? "..." : <Download size={18} />)}
-              </PDFDownloadLink>
+                <PDFDownloadLink
+                  document={
+                    <InvoiceDocument
+                      invoice={invoice}
+                      projectName={getProjectName(invoice.project_id)}
+                    />
+                  }
+                  fileName={`factura_${invoice.number}.pdf`}
+                  className="text-gray-400 hover:text-blue-500 p-2 transition-colors"
+                >
+                  {({ loading }) => (loading ? "..." : <Download size={18} />)}
+                </PDFDownloadLink>
 
-              <button
-                onClick={() => handleDelete(invoice.id)}
-                className="text-gray-400 hover:text-red-500 p-2 transition-colors"
-              >
-                <Trash2 size={18} />
-              </button>
+                <button
+                  onClick={() => handleDelete(invoice.id)}
+                  className="text-gray-400 hover:text-red-500 p-2 transition-colors"
+                >
+                  <Trash2 size={18} />
+                </button>
+              </div>
             </div>
           </div>
         ))}

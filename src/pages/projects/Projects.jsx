@@ -58,11 +58,12 @@ export default function Projects() {
 
   return (
     <Layout>
-      <div className="flex justify-between items-center mb-6">
+      {/* RESPONSIVE: Cabecera flexible */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 sm:gap-0">
         <h1 className="text-2xl font-bold text-gray-800">Proyectos</h1>
         <Link
           to="/projects/new"
-          className="bg-primary hover:bg-violet-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
+          className="bg-primary hover:bg-violet-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors w-full sm:w-auto justify-center"
         >
           <Plus size={20} />
           <span>Nuevo Proyecto</span>
@@ -87,6 +88,7 @@ export default function Projects() {
         </div>
       )}
 
+      {/* Grid Responsive: 1 columna en móvil, 2 en tablet, 3 en PC */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredProjects.map((project) => (
           <div
