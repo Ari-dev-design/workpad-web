@@ -386,7 +386,7 @@ Agradecimientos especiales a:
 
 - La comunidad de **React** y **Supabase**
 - Los creadores de las librerías open-source utilizadas
-- Tutores y compañeros del módulo formativo
+- Tutores y compañeros del módulo formativo.
 
 ---
 
