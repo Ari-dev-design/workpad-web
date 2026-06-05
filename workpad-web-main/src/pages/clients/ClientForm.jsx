@@ -204,7 +204,7 @@ export default function ClientForm() {
               </label>
               <div className="h-64 w-full rounded-xl overflow-hidden border border-gray-300 z-0 relative">
                 <MapContainer
-                  center={mapPosition || [40.4168, -3.7038]} // Madrid por defecto
+                  center={mapPosition || [28.1235, -15.4363]}// Las Palmas
                   zoom={5}
                   scrollWheelZoom={false}
                   style={{ height: "100%", width: "100%" }}
