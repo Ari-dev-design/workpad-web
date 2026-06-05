@@ -355,6 +355,7 @@ WorkPad usa PostgreSQL a través de Supabase con RLS activado. Cada usuario solo
 - El PDF de factura no incluye datos fiscales del emisor (NIF, dirección)
 - No existe recuperación de contraseña por email
 - No se validan nombres duplicados de clientes
+- No hay pantalla de detalle de cliente. En una versión futura se podría ver todos los proyectos y facturas asociadas a un cliente desde su propia página.
 
 ---
 
